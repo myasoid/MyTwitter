@@ -26,7 +26,8 @@
 </head>
 
 <body>
-<div class="container">
+
+<div class="container ">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
@@ -34,23 +35,37 @@
                     <h5 class="text-center">
                         SIGN IN</h5>
 
-                    <form class="form formin" role="form">
+                    <c:url value="/j_spring_security_check" var="loginUrl" />
+                    <form class="form form-signin" role="form" enctype="multipart/form-data" method="post" action="${loginUrl}">
                         <div class="form-group">
                             <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-twitter"></span>
                                     </span>
-                                <input type="text" class="form-control" placeholder="User"/>
+                                <input type="text" class="form-control" name="j_username" placeholder="login"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="password" class="form-control" placeholder="Password"/>
+                                <input type="password" class="form-control" name="j_password" placeholder="Password"/>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <input id="submit" name="submit" type="submit" value="Submit"
+                                   class="btn btn-primary btn-block" role="button">
+                        </div>
+                    </form>
+
+                    <%--<div class="container" style="width: 300px;">--%>
+                        <%--<c:url value="/j_spring_security_check" var="loginUrl" />--%>
+                        <%--<form action="${loginUrl}" method="post">--%>
+                            <%--<h2 class="form-signin-heading">Please sign in</h2>--%>
+                            <%--<input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus value="colibri">--%>
+                            <%--<input type="password" class="form-control" name="j_password" placeholder="Password" required value="1234">--%>
+                            <%--<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>--%>
+                        <%--</form>--%>
+                    <%--</div>--%>
                 </div>
-                <a href="http://www.jquery2dotnet.com" class="btn btn-sm btn-primary btn-block" role="button">
-                    SUBMIT</a> </form>
             </div>
         </div>
     </div>
@@ -59,7 +74,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<%--<script src="js/bootstrap.min.js"></script>--%>
 </body>
 
 </html>

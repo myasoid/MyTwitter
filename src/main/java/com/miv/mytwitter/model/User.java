@@ -10,6 +10,11 @@ import java.util.Set;
 @Table(name = "Users")
 public class User extends BaseEntity {
 
+    public static final int EMAIL_MAX = 250;
+    public static final int NAME_MAX = 50;
+    public static final int RANDOM_CODE_LENGTH = 16;
+    public static final int PASSWORD_MAX = 30;
+
     private static final long serialVersionUID = 1L;
 
     @Column(unique = true, nullable = false)
@@ -46,7 +51,7 @@ public class User extends BaseEntity {
 
     private Set<User> followers;
 
-    protected User() {
+    public User() {
     }
 
     public User(String name, String login, String password) {

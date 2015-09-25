@@ -23,6 +23,7 @@ public class UserController {
                           @RequestParam(value = "password") String password,
                           HttpServletRequest request,
                           HttpServletResponse response) {
+
         User user = new User(name, login, password);
         repository.save(user);
         return "redirect:/" + login;
