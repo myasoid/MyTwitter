@@ -1,7 +1,7 @@
-package com.miv.mytwitter.spring.controller;
+package com.miv.mytwitter.controller;
 
 
-import com.miv.mytwitter.spring.data.UserRepository;
+import com.miv.mytwitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +16,9 @@ import javax.transaction.Transactional;
 
 @Controller
 public class ProfileController {
+
     @Autowired
-    UserRepository repository;
+    UserService userService;
 
     @RequestMapping(value = "/login?success", method = RequestMethod.GET)
     @ResponseBody
@@ -31,7 +32,7 @@ public class ProfileController {
     @ResponseBody
     @Transactional
     public ModelAndView getProfile(@PathVariable("login") String login, HttpServletRequest request, HttpServletResponse response) {
-        return getModelAndViewProfile(login,"twits");
+        return getModelAndViewProfile(login,"tweets");
     }
 
     @RequestMapping(value = "/{login}/following", method = RequestMethod.GET)
@@ -51,7 +52,7 @@ public class ProfileController {
     @Transactional
     public ModelAndView getModelAndViewProfile(String login, String tab){
         ModelAndView modelAndView = new ModelAndView("profile_page");
-        modelAndView.addObject("user", repository.findByLogin(login));
+        modelAndView.addObject("user", userService.findByLogin(login));
         modelAndView.addObject("tab", tab);
         return modelAndView;
     }

@@ -1,4 +1,4 @@
-package com.miv.mytwitter.spring.controller;
+package com.miv.mytwitter.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

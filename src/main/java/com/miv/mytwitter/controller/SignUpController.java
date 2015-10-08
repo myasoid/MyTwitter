@@ -1,4 +1,4 @@
-package com.miv.mytwitter.spring.controller;
+package com.miv.mytwitter.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class SignInController{
+public class SignUpController {
 
-        @RequestMapping(value = "/signin", method = RequestMethod.GET)
-        @ResponseBody
-        public ModelAndView signIn() {
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView signUp() {
 
-            return new ModelAndView("signin_page");
+        return new ModelAndView("signup_page");
 
-        }
+    }
+
 }

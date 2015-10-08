@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public abstract class AbstractBaseEntity implements Serializable {
 
     @GeneratedValue(generator = "guid")
     @GenericGenerator(name = "guid", strategy = "guid")

@@ -1,7 +1,6 @@
-package com.miv.mytwitter.spring.controller;
+package com.miv.mytwitter.controller;
 
-import com.miv.mytwitter.model.User;
-import com.miv.mytwitter.spring.data.UserRepository;
+import com.miv.mytwitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
 
     @Autowired
-    UserRepository repository;
+    UserService userService;
 
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public String addUser(@RequestParam(value = "name") String name,
@@ -24,8 +23,7 @@ public class UserController {
                           HttpServletRequest request,
                           HttpServletResponse response) {
 
-        User user = new User(name, login, password);
-        repository.save(user);
+        userService.creatUser(name, login, password);
         return "redirect:/" + login;
 
     }

@@ -35,7 +35,7 @@
                     <h5 class="text-center">
                         SIGN UP</h5>
 
-                    <%--<form role="form" enctype="multipart/form-data" class="form-horizontal" action="/SpringMVC_war_exploded/add" method="post">--%>
+                    <%--<form role="form" enctype="multipart/form-repository" class="form-horizontal" action="/SpringMVC_war_exploded/add" method="post">--%>
                     <form class="form form-signup" role="form" enctype="multipart/form-data" method="post" action="/user/add">
                         <div class="form-group">
                             <div class="input-group">

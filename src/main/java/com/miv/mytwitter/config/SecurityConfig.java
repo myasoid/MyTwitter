@@ -1,6 +1,6 @@
-package com.miv.mytwitter.spring.config;
+package com.miv.mytwitter.config;
 
-import com.miv.mytwitter.spring.service.*;
+import com.miv.mytwitter.service.implementation.UserServiceRelational;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,13 +16,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    UserServiceRelational userService;
 
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService);
-        //  .passwordEncoder(getShaPasswordEncoder());
+                .userDetailsService(userService);
+         // .passwordEncoder(getShaPasswordEncoder());
     }
 
     @Override
@@ -31,16 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/signin", "/signup").permitAll()
+                .antMatchers("/signin", "/signup", "/user/add").permitAll()
                 .anyRequest().authenticated()
                 .and();
 
         http.formLogin()
                 .loginPage("/signin")
-                .loginProcessingUrl("/j_spring_security_check")
-//                .defaultSuccessUrl("/")
-             //   .successHandler(new )
-                .failureUrl("/signin?error")
+                //.loginProcessingUrl("/j_spring_security_check")
+                .defaultSuccessUrl("/")
+                        //.successHandler(new )
+                        //.failureUrl("/signin?error")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .permitAll()
@@ -51,20 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
-
     }
 
-//    @Bean
-//    public ShaPasswordEncoder getShaPasswordEncoder() {
-//        return new ShaPasswordEncoder();
-//    }
-
-
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("profile_page");
-//        registry.addViewController("/signup").setViewName("signup_page");
-//        registry.addViewController("/signin").setViewName("signin_page");
-//        registry.addViewController("/{user}").setViewName("profile_page");
-//    }
 
 }

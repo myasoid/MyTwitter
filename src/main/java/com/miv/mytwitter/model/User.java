@@ -1,14 +1,12 @@
 package com.miv.mytwitter.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "Users")
-public class User extends BaseEntity {
+public class User extends AbstractBaseEntity {
 
     public static final int EMAIL_MAX = 250;
     public static final int NAME_MAX = 50;
@@ -19,9 +17,11 @@ public class User extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String login;
+    @Column
     private String password;
 
-    @Size(min = 3, max = 200)
+    //@Size(min = 3, max = 200)
+    @Column
     private String name;
 
     @Lob
@@ -30,7 +30,7 @@ public class User extends BaseEntity {
     private byte[] profileCover;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private Set<Twit> twits;
+    private Set<Tweet> tweets;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Followers",
@@ -48,10 +48,13 @@ public class User extends BaseEntity {
             inverseJoinColumns =
             @JoinColumn(name = "Follower")
     )
-
     private Set<User> followers;
 
     public User() {
+    }
+
+    public User(String login) {
+        this.login = login;
     }
 
     public User(String name, String login, String password) {
@@ -94,12 +97,12 @@ public class User extends BaseEntity {
         this.profileCover = profileCover;
     }
 
-    public Set<Twit> getTwits() {
-        return twits;
+    public Set<Tweet> getTwits() {
+        return tweets;
     }
 
-    public void setTwits(Set<Twit> twits) {
-        this.twits = twits;
+    public void setTwits(Set<Tweet> twits) {
+        this.tweets = twits;
     }
 
     public Set<User> getFollowings() {
@@ -143,35 +146,21 @@ public class User extends BaseEntity {
 
         User user = (User) o;
 
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (!Arrays.equals(avatar, user.avatar)) return false;
-        return Arrays.equals(profileCover, user.profileCover);
+        return login.equals(user.login);
 
     }
 
     @Override
     public int hashCode() {
-        int result = login != null ? login.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (avatar != null ? Arrays.hashCode(avatar) : 0);
-        result = 31 * result + (profileCover != null ? Arrays.hashCode(profileCover) : 0);
-        return result;
+        return login.hashCode();
     }
+
 
     @Override
     public String toString() {
         return "User{" +
-                ", id='" + getId() + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
+                "login='" + login + '\'' +
                 ", name='" + name + '\'' +
-//                ", twits=" + getTwits() +
-//                ", following=" + getfollowings() +
-//                ", followers=" + getFollowers() +
                 '}';
     }
-
 }

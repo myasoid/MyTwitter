@@ -1,4 +1,4 @@
-package com.miv;
+package com.miv.twitter;
 
 import com.miv.mytwitter.MyTwitterApplication;
 import org.junit.Test;
