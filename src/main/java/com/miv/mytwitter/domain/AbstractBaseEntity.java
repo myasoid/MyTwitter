@@ -1,4 +1,4 @@
-package com.miv.mytwitter.model;
+package com.miv.mytwitter.domain;
 
 import java.io.Serializable;
 import java.util.Date;

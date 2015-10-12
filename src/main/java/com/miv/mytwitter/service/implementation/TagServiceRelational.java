@@ -1,7 +1,7 @@
 package com.miv.mytwitter.service.implementation;
 
 import com.miv.mytwitter.service.TagService;
-import com.miv.mytwitter.model.Tag;
+import com.miv.mytwitter.domain.Tag;
 import com.miv.mytwitter.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

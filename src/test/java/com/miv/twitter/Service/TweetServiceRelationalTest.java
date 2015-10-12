@@ -1,8 +1,8 @@
 package com.miv.twitter.Service;
 
 import com.miv.mytwitter.MyTwitterApplication;
-import com.miv.mytwitter.model.Tweet;
-import com.miv.mytwitter.model.User;
+import com.miv.mytwitter.domain.Tweet;
+import com.miv.mytwitter.domain.User;
 import com.miv.mytwitter.service.TweetService;
 import com.miv.mytwitter.service.UserService;
 import org.junit.Test;

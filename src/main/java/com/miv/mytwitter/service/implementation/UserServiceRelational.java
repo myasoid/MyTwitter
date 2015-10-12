@@ -1,7 +1,8 @@
 package com.miv.mytwitter.service.implementation;
 
-import com.miv.mytwitter.model.User;
-import com.miv.mytwitter.model.enums.UserRoleEnum;
+import com.miv.mytwitter.domain.User;
+import com.miv.mytwitter.domain.UserCreateForm;
+import com.miv.mytwitter.domain.enums.UserRoleEnum;
 import com.miv.mytwitter.repository.UserRepository;
 import com.miv.mytwitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -23,9 +25,10 @@ public class UserServiceRelational implements UserService {
 
     @Override
     public User findByLogin(String login) {
-        List<User> list = userRepository.findByLogin(login);
-        if (list.size() > 0){
-            return list.get(0);
+        Optional<User> userOptional = userRepository.findOneByLogin(login);
+
+        if (userOptional.isPresent()) {
+            return userOptional.get();
         }
         return null;
     }
@@ -49,22 +52,30 @@ public class UserServiceRelational implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-
-        User user = findByLogin(login);
-        Set<GrantedAuthority> roles = new HashSet();
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
-
-        UserDetails userDetails =
-                new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), roles);
-
-        return userDetails;
-    }
 
     @Override
     public User save(User user) {
         return userRepository.save(user);
     }
 
+    @Override
+    public Optional<User> getUserByLogin(String login) {
+        return userRepository.findOneByLogin(login);
+    }
+
+    @Override
+    public User create(UserCreateForm form) {
+        User user = new User();
+        String[] names = form.getName().split(" ");
+        if(names.length > 0){
+            user.setFirstName(names[0]);
+        }
+        if(names.length > 1){
+            user.setLastName(names[1]);
+        }
+        user.setLogin(form.getLogin());
+        user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
+        user.setRole(form.getRole());
+        return userRepository.save(user);
+    }
 }

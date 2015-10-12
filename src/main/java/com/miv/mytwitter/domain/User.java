@@ -1,6 +1,13 @@
-package com.miv.mytwitter.model;
+package com.miv.mytwitter.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.miv.mytwitter.domain.enums.UserRoleEnum;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,14 +22,41 @@ public class User extends AbstractBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(unique = true, nullable = false)
+    @NotNull
+    @Pattern(regexp = "^[a-z0-9]*$")
+    @Size(min = 1, max = 50)
+    @Column(length = 50, unique = true, nullable = false)
     private String login;
-    @Column
+
+    @JsonIgnore
+    @NotNull
+    @Size(min = 60, max = 60)
+    @Column(length = 60)
     private String password;
 
-    //@Size(min = 3, max = 200)
-    @Column
-    private String name;
+    @Size(max = 50)
+    @Column(name = "first_name", length = 50)
+    private String firstName;
+
+    @Size(max = 50)
+    @Column(name = "last_name", length = 50)
+    private String lastName;
+
+    @Email
+    @Size(max = 100)
+    @Column(length = 100, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private boolean activated = false;
+
+    @Size(min = 2, max = 5)
+    @Column(name = "lang_key", length = 5)
+    private String langKey;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role;
 
     @Lob
     private byte[] avatar;
@@ -58,7 +92,6 @@ public class User extends AbstractBaseEntity {
     }
 
     public User(String name, String login, String password) {
-        this.name = name;
         this.login = login;
         this.password = password;
         this.followers = new HashSet<User>();
@@ -79,6 +112,14 @@ public class User extends AbstractBaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
     }
 
     public byte[] getAvatar() {
@@ -131,12 +172,44 @@ public class User extends AbstractBaseEntity {
         }
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    public String getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(String langKey) {
+        this.langKey = langKey;
     }
 
     @Override
@@ -160,7 +233,13 @@ public class User extends AbstractBaseEntity {
     public String toString() {
         return "User{" +
                 "login='" + login + '\'' +
-                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", activated=" + activated +
+                ", langKey='" + langKey + '\'' +
                 '}';
     }
+
 }

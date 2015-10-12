@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_errorIsPresent" content="${error.isPresent()}"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Sign in</title>
 
@@ -35,36 +37,35 @@
                     <h5 class="text-center">
                         SIGN IN</h5>
 
-                    <c:url value="/j_spring_security_check" var="loginUrl" />
-                    <form class="form form-signin" role="form" enctype="multipart/form-data" method="post" action="${loginUrl}">
+                    <form class="form form-signin" role="form" enctype="multipart/form-data" method="post" action="/sigin">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                         <div class="form-group">
                             <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-twitter"></span>
-                                    </span>
-                                <input type="text" class="form-control" name="j_username" placeholder="login"/>
+                                <span class="input-group-addon"><span class="fa fa-twitter"></span> </span>
+                                <input type="text" class="form-control" name="login" id="login" placeholder="Login"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="password" class="form-control" name="j_password" placeholder="Password"/>
+                                <input type="password" class="form-control" name="password" id="password"
+                                       placeholder="Password" required/>
                             </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="remember-me" id="remember-me"> Remember me
+                            </label>
                         </div>
                         <div class="form-group">
                             <input id="submit" name="submit" type="submit" value="Submit"
                                    class="btn btn-primary btn-block" role="button">
                         </div>
                     </form>
-
-                    <%--<div class="container" style="width: 300px;">--%>
-                        <%--<c:url value="/j_spring_security_check" var="loginUrl" />--%>
-                        <%--<form action="${loginUrl}" method="post">--%>
-                            <%--<h2 class="form-signin-heading">Please sign in</h2>--%>
-                            <%--<input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus value="colibri">--%>
-                            <%--<input type="password" class="form-control" name="j_password" placeholder="Password" required value="1234">--%>
-                            <%--<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>--%>
-                        <%--</form>--%>
-                    <%--</div>--%>
+                    <c:if test="${_errorIsPresents}">
+                        <p>The login or password you have entered is invalid, try again.</p>
+                    </c:if>
                 </div>
             </div>
         </div>

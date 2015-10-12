@@ -1,4 +1,4 @@
-package com.miv.mytwitter.model;
+package com.miv.mytwitter.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;

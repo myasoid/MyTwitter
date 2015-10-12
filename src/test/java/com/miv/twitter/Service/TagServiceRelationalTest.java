@@ -1,7 +1,7 @@
 package com.miv.twitter.Service;
 
 import com.miv.mytwitter.MyTwitterApplication;
-import com.miv.mytwitter.model.Tag;
+import com.miv.mytwitter.domain.Tag;
 import com.miv.mytwitter.service.TagService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

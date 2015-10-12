@@ -1,4 +1,4 @@
-package com.miv.mytwitter.model.enums;
+package com.miv.mytwitter.domain.enums;
 
 public enum UserRoleEnum {
 

@@ -1,7 +1,7 @@
 package com.miv.mytwitter.repository;
 
 
-import com.miv.mytwitter.model.Tweet;
+import com.miv.mytwitter.domain.Tweet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
