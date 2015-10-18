@@ -53,7 +53,6 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             // failed validation
             ModelAndView view = new ModelAndView("signup_up", "error", bindingResult.toString());
-//            view.addObject("bindingResult", bindingResult);
             return view;
 
         }

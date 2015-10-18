@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 
 <head>
@@ -9,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_csrf" content="${_csrf.token}"/>
-    <meta name="_errorIsPresent" content="${error.isPresent()}"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Sign in</title>
 
@@ -63,9 +63,9 @@
                                    class="btn btn-primary btn-block" role="button">
                         </div>
                     </form>
-                    <c:if test="${_errorIsPresents}">
-                        <p>The login or password you have entered is invalid, try again.</p>
-                    </c:if>
+                    <%--<c:if test="${error != null}">--%>
+                    <%--<p>The login or password you have entered is invalid, try again.</p>--%>
+                    <%--</c:if>--%>
                 </div>
             </div>
         </div>

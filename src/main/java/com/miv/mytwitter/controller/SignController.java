@@ -1,6 +1,5 @@
 package com.miv.mytwitter.controller;
 
-import com.miv.mytwitter.domain.UserCreateForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,8 @@ public class SignController {
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView getSignInPage(@RequestParam Optional<String> error) {
         LOGGER.debug("Getting sign in page, error={}", error);
-        return new ModelAndView("signin_page", "error", error.get());
+//        return new ModelAndView("signin_page", "error", error.get());
+        return new ModelAndView("signin_page");
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
