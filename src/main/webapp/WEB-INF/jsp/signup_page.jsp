@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_csrf" content="${_csrf.token}"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Sign up</title>
@@ -77,9 +77,9 @@
                                    class="btn btn-primary btn-block" role="button">
                         </div>
                     </form>
-                    <c:if test="${error != null}">
-                    <p> <c:out value="${error}"/><p>
-                    </c:if>
+                    <%--<c:if test="${error != null}">--%>
+                    <%--<p> <c:out value="${error}"/><p>--%>
+                    <%--</c:if>--%>
 
                 </div>
             </div>
