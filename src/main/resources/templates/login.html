@@ -27,12 +27,12 @@
                             SIGN IN</h5>
 
                         <form class="form form-signin" role="form" enctype="multipart/form-data" method="post"
-                              th:action="@{/j_spring_security_check}">
+                              th:action="@{/login}">
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-twitter"></span> </span>
-                                    <input type="text" class="form-control" name="login" id="login"
+                                    <input type="text" class="form-control" name="username" id="login"
                                            placeholder="Login"/>
                                 </div>
                             </div>
@@ -52,9 +52,9 @@
                                         </label>
                                     </div>
                                     <div class="col-sm-6 col">
-                                        k <p>
-                                        <a href="/signup" th:href="@{/signup}">Register</a>
-                                    </p>
+                                        <p>
+                                            <a href="/signup" th:href="@{/signup}">Register</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -62,10 +62,12 @@
                                 <input id="submit" name="submit" type="submit" value="Submit"
                                        class="btn btn-primary btn-block" role="button"/>
                             </div>
-                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         </form>
-                        <div th:if="${loginError}">
+                        <div th:if="${param.error}">
                             Invalid username and password.
+                        </div>
+                        <div th:if="${param.logout}">
+                            You have been logged out.
                         </div>
                     </div>
                 </div>
