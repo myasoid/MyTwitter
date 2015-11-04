@@ -21,7 +21,7 @@ public class IndexController {
     public String showIndex(final HttpServletRequest request, Principal principal, Model model) {
         final String currentUserLogin = principal.getName();
         User user = userService.findByLogin(currentUserLogin);
-
+        model.addAttribute("profile", "/" + currentUserLogin);
 
         return "index";
     }
