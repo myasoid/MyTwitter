@@ -82,7 +82,7 @@
             </div>
             <div class="row">
                 <div class="span3 offset1">
-                    Twits <span class="badge badge-success">${user.getTwits().size()}</span> Following <span
+                    Tweets <span class="badge badge-success">${user.getTweets().size()}</span> Following <span
                         class="badge badge-success">${user.getFollowings().size()}</span> Followers <span
                         class="badge badge-success">${user.getFollowers().size()}</span>
                 </div>
@@ -96,8 +96,8 @@
     <div class="col-sm-6">
         <div class="row">
             <ul class="nav nav-tabs" id="UserTabs">
-                <li class="nav-link <c:if test="${tab == 'twits'}">active</c:if>" role="presentation"><a href="/${user.getLogin()}">Twits <span
-                        class="badge badge-success active">${user.getTwits().size()}</span></a></li>
+                <li class="nav-link <c:if test="${tab == 'tweets'}">active</c:if>" role="presentation"><a href="/${user.getLogin()}">Tweets <span
+                        class="badge badge-success active">${user.getTweets().size()}</span></a></li>
                 <li class="nav-link <c:if test="${tab == 'following'}">active</c:if>" role="presentation"><a href="/${user.getLogin()}/following">Following <span
                         class="badge badge-success">${user.getFollowings().size()}</span></a></li>
                 <li class="nav-link <c:if test="${tab == 'followers'}">active</c:if>" role="presentation"><a href="/${user.getLogin()}/followers">Followers <span
@@ -108,12 +108,12 @@
         <div class="row">
             <div class="col-xs-12">
 
-                <!--twits-->
-                <c:if test = "${tab=='twits'}">
-                <c:forEach items="${user.getTwits()}" var="twit">
-                    <h2>${twit.getOwner().getLogin()}</h2>
+                <!--tweets-->
+                <c:if test = "${tab=='tweets'}">
+                <c:forEach items="${user.getTweets()}" var="tweet">
+                    <h2>${tweet.getOwner().getLogin()}</h2>
 
-                    <p>${twit.getText()}</p>
+                    <p>${tweet.getText()}</p>
 
                     <p class="lead">
                         <button class="btn btn-default">Read More</button>
@@ -121,14 +121,14 @@
                     <p class="pull-right"><span class="label label-default">keyword</span> <span
                             class="label label-default">tag</span> <span class="label label-default">post</span></p>
                     <ul class="list-inline">
-                        <li><a href="#">${twit.getDateCreated()}</a></li>
+                        <li><a href="#">${tweet.getDateCreated()}</a></li>
                             <%--<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li>--%>
                             <%--<li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li>--%>
                     </ul>
                     <hr>
                 </c:forEach>
                 </c:if>
-                <!--/twits-->
+                <!--/tweets-->
 
                 <!--following-->
                 <c:if test = "${tab=='following'}">
@@ -148,7 +148,7 @@
                             </div>
                             <div class="row">
                                 <div class="span3 offset1">
-                                    Twits <span class="badge badge-success">${user.getTwits().size()}</span> Following <span
+                                    Tweets <span class="badge badge-success">${user.getTweets().size()}</span> Following <span
                                         class="badge badge-success">${user.getFollowings().size()}</span> Followers <span
                                         class="badge badge-success">${user.getFollowers().size()}</span>
                                 </div>
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="span3 offset1">
-                                        Twits <span class="badge badge-success">${user.getTwits().size()}</span> Following <span
+                                        Tweets <span class="badge badge-success">${user.getTweets().size()}</span> Following <span
                                             class="badge badge-success">${user.getFollowings().size()}</span> Followers <span
                                             class="badge badge-success">${user.getFollowers().size()}</span>
                                     </div>

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Sign up</title>
 
@@ -35,26 +37,39 @@
                     <h5 class="text-center">
                         SIGN UP</h5>
 
-                    <%--<form role="form" enctype="multipart/form-data" class="form-horizontal" action="/SpringMVC_war_exploded/add" method="post">--%>
-                    <form class="form form-signup" role="form" enctype="multipart/form-data" method="post" action="/user/add">
+                    <%--<form role="form" enctype="multipart/form-repository" class="form-horizontal" action="/SpringMVC_war_exploded/add" method="post">--%>
+                    <form class="form form-signup" role="form" enctype="multipart/form-data" method="post"
+                          action="/user/create">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                <input type="text" class="form-control" name="name" placeholder="Name"/>
+                                <input type="text" class="form-control" name="name" placeholder="First last name"/>
                             </div>
                         </div>
-                        <%--<div class="form-group"><input type="text" class="form-control" name="name" placeholder="Name"></div>--%>
                         <div class="form-group">
                             <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-twitter"></span>
                                     </span>
-                                <input type="text" class="form-control" name="login" placeholder="login"/>
+                                <input type="login" class="form-control" name="Login" id="login" placeholder="login"
+                                       value="${form.login}" required autofocus/>
+                                <%--<p> <c:out value="${bindingResult.getFieldError('login.exists').getDefaultMessage()}"/><p>--%>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="password" class="form-control" name="password" placeholder="Password"/>
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                       id="password" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" class="form-control" name="passwordRepeated"
+                                       placeholder="Password repeated" id="passwordRepeated" required/>
+                                <%--<form:errors path="password"></form:errors>--%>
                             </div>
                         </div>
                         <div class="form-group">
@@ -62,6 +77,10 @@
                                    class="btn btn-primary btn-block" role="button">
                         </div>
                     </form>
+                    <%--<c:if test="${error != null}">--%>
+                    <%--<p> <c:out value="${error}"/><p>--%>
+                    <%--</c:if>--%>
+
                 </div>
             </div>
         </div>
