@@ -3,6 +3,7 @@ package com.miv.mytwitter.service.implementation;
 
 import com.miv.mytwitter.domain.User;
 import com.miv.mytwitter.domain.Tweet;
+import com.miv.mytwitter.domain.validator.TweetCreateForm;
 import com.miv.mytwitter.repository.TweetRepository;
 import com.miv.mytwitter.service.TagService;
 import com.miv.mytwitter.service.TweetService;
@@ -23,8 +24,10 @@ public class TweetServiceRelational implements TweetService {
 
     @Autowired
     UserService userService;
+
     @Autowired
     TagService tagService;
+
     @Autowired
     TweetRepository tweetRepository;
 
@@ -39,12 +42,20 @@ public class TweetServiceRelational implements TweetService {
         addMentions(tweet, text);
         addTags(tweet, text);
         return save(tweet);
-
     }
 
     @Override
     public void delete(String id) {
         tweetRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public Tweet create(TweetCreateForm form) {
+        Tweet tweet = new Tweet(form.getOwner(), form.getText());
+        addMentions(tweet, tweet.getText());
+        addTags(tweet, tweet.getText());
+        return save(tweet);
     }
 
     public void readTweet(User owner, String text) {

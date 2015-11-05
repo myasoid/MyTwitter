@@ -2,7 +2,7 @@ package com.miv.mytwitter.service;
 
 
 import com.miv.mytwitter.domain.User;
-import com.miv.mytwitter.domain.UserCreateForm;
+import com.miv.mytwitter.domain.validator.UserCreateForm;
 
 import java.util.Optional;
 

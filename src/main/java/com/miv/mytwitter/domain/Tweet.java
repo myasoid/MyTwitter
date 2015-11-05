@@ -35,7 +35,7 @@ public class Tweet extends AbstractBaseEntity {
     private Set<User> mentions = new HashSet<User>();
 
     @Column
-    Tweet source;
+    private Tweet source;
 
     protected Tweet() {
     }
@@ -113,4 +113,5 @@ public class Tweet extends AbstractBaseEntity {
                 "text='" + text + '\'' +
                 '}';
     }
+
 }

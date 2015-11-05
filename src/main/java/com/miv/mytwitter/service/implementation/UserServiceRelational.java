@@ -1,21 +1,14 @@
 package com.miv.mytwitter.service.implementation;
 
 import com.miv.mytwitter.domain.User;
-import com.miv.mytwitter.domain.UserCreateForm;
-import com.miv.mytwitter.domain.enums.UserRoleEnum;
+import com.miv.mytwitter.domain.validator.UserCreateForm;
 import com.miv.mytwitter.repository.UserRepository;
 import com.miv.mytwitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserServiceRelational implements UserService {

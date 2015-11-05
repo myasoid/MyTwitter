@@ -1,6 +1,6 @@
 package com.miv.mytwitter.controller;
 
-import com.miv.mytwitter.domain.UserCreateForm;
+import com.miv.mytwitter.domain.validator.UserCreateForm;
 import com.miv.mytwitter.domain.validator.UserCreateFormValidator;
 import com.miv.mytwitter.service.UserService;
 import org.slf4j.Logger;

@@ -10,15 +10,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
-import java.util.List;
-
 @Repository
 public interface TweetRepository extends JpaRepository<Tweet, String> {
 
-    List<Tweet> findAll();
+    Page<Tweet> findByOwner(User user, Pageable page);
 
-    @Query("select u from Tweet u where u.firstname = :user")
-    Page<Tweet> findByLastnameOrFirstname(@Param("user") User user, Pageable page);
+    @Query("select t from Tweet t where t.owner in (select u.following from User u where u  = :user)")
+    Page<Tweet> findByUser(@Param("user") User user, Pageable page);
 
 }

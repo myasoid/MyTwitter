@@ -1,68 +1,57 @@
 package com.miv.mytwitter.controller;
 
-import com.miv.mytwitter.domain.Tweet;
 import com.miv.mytwitter.domain.User;
+import com.miv.mytwitter.domain.validator.TweetCreateForm;
+import com.miv.mytwitter.domain.validator.TweetCreateFormValidator;
 import com.miv.mytwitter.service.TweetService;
-import com.miv.mytwitter.service.implementation.TweetServiceRelational;
+import com.miv.mytwitter.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class TweetController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class);
+    private final TweetService tweetService;
+    private final UserService userService;
+    private final TweetCreateFormValidator tweetCreateFormValidator;
+
+
+
     @Autowired
-    TweetService tweetService;
+    public TweetController(TweetService tweetService, TweetCreateFormValidator tweetCreateFormValidator, UserService userService) {
+        this.tweetService = tweetService;
+        this.tweetCreateFormValidator = tweetCreateFormValidator;
+        this.userService = userService;
+    }
 
+    @InitBinder("tweetForm")
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(tweetCreateFormValidator);
+    }
 
-//    @RequestMapping("/tweet/create")
-//    @ResponseBody
-//    public void create(String text) {
-//
-//        TweetService tweetService = new TweetServiceRelational();
-//        tweetService.creatTweet(new User(), text);
-//
-//    }
-//
-//    @RequestMapping("/tweet/delete")
-//    @ResponseBody
-//    public String delete(String id) {
-//        try {
-//            tweetService.delete(id);
-//        } catch (Exception ex) {
-//            return "Error deleting the tweet:" + ex.toString();
-//        }
-//        return "Tweet succesfully deleted!";
-//    }
-//
-//    @RequestMapping("/tweet/get-tweets")
-//    @ResponseBody
-//    public String get() {
-//        String userId;
-//        List<Tweet> list;
-//        try {
-//            //list = tweetService.findAll();
-//        } catch (Exception ex) {
-//            return "Tweet not found";
-//        }
-//        return "The tweet id is: ";//+ list.toString();
-//    }
-//
-//
-//    @RequestMapping("/tweet/update")
-//    @ResponseBody
-//    public String updateUser(String id, String text) {
-//        try {
-////            //яяTweet tweet = tweetService.findOne(id);
-////            tweet.setText(text);
-////            tweetService.save(tweet);
-//        } catch (Exception ex) {
-//            return "Error updating the tweet: " + ex.toString();
-//        }
-//        return "Tweet succesfully updated!";
-//    }
+    @RequestMapping(value = "/tweet/create", method = RequestMethod.POST)
+    public void handleTweetCreateForm(@Valid @ModelAttribute("tweetForm") TweetCreateForm form, Errors errors, Principal principal) {
+        LOGGER.debug("Processing tweet create form={}, bindingResult={}", form, errors);
+        final String currentUserLogin = principal.getName();
+        User user = userService.findByLogin(currentUserLogin);
+        form.setOwner(user);
+        try {
+            tweetService.create(form);
+        } catch (DataIntegrityViolationException e) {
+            LOGGER.warn("Exception occurred when trying to save the tweet", e);
+            errors.reject("tweet.exists", " .........");
+        }
+    }
+
 
 }

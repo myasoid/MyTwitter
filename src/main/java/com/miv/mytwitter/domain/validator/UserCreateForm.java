@@ -1,4 +1,4 @@
-package com.miv.mytwitter.domain;
+package com.miv.mytwitter.domain.validator;
 
 import com.miv.mytwitter.domain.enums.UserRoleEnum;
 import org.hibernate.validator.constraints.NotEmpty;
