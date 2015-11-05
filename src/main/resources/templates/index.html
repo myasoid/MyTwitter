@@ -83,6 +83,59 @@
         <!-- /.container-fluid -->
     </nav>
 
+    <div class="container-fluid">
+
+        <!--left-->
+        <div class="col-sm-3 col">
+            <div class="container usercard">
+                <div class="row">
+                    <div class="span1">
+                        <img class="thumbnail" src="//placehold.it/100x100"/>
+                    </div>
+                    <div class="span3">
+                        <h5 th:text="${user.firstName + ' ' + user.lastName}">lastName</h5>
+                        <h5 th:text="${user.Login}">login</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span3 offset1">
+                        Tweets <span class="badge badge-success" th:text="${tweetssize}">3</span>
+                        Following <span class="badge badge-success" th:text="${followingssize}">6</span>
+                        Followers <span class="badge badge-success" th:text="${followerssize}">9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--center-->
+        <div class="col-sm-6 col">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Article Heading</h2>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet
+                        vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean
+                        sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis
+                        elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+
+                    <p class="lead">
+                        <button class="btn btn-default">Read More</button>
+                    </p>
+                    <p class="pull-right"><span class="label label-default">keyword</span> <span
+                            class="label label-default">tag</span> <span class="label label-default">post</span></p>
+                    <ul class="list-inline">
+                        <li><a href="#">2 Days Ago</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--right-->
+        <div class="col-sm-3 col">
+        </div>
+    </div>
 
 </div>
 
