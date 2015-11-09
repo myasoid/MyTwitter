@@ -4,266 +4,58 @@
 <head lang="en">
 
     <title>MyTwitter</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet"
-          th:href="@{/webjars/font-awesome/4.4.0/css/font-awesome.min.css}"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"
-            th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
 
 </head>
 <body>
 
 <div class="container">
 
+    <nav th:replace="fragments/navbar">Navbar</nav>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+    <div class="card-group card-fluid">
+        <div class="card">
+            <img class="card-img-top" data-src="holder.js/100%x180/" alt="Card image cap"/>
+
+            <div class="card-block">
+                <h4 class="card-title">Card title</h4>
+
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+
+                <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form class="navbar-form" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search"/>
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><span sec:authentication="name">Username</span> <span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu">
-
-                            <li><a th:href="${profile}">View profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a th:href="@{/settings}">Settings</a></li>
-                            <li><a th:href="@{/logout}">Log out</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <form class="navbar-form">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#modaltweet"><i class="fa fa-twitter-square"> Tweet</i></button>
-                        </form>
-                    </li>
-                    <div class="modal fade" id="modaltweet">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="form-horizontal">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h3 class="modal-title" align="center">New tweet</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" th:action="@{/tweet/create}" th:object="${tweetForm}">
-                                            <p>
-
-                                            <div class="col-lg-12">
-                                               <textarea name="text" id="text" cols="74" rows="4"
-                                                         class="form-control" placeholder="What's new?"></textarea>
-                                            </div>
-                                            </p>
-                                            <p>
-
-                                            <div class="row row right">
-                                                <button type="submit" class="btn btn-primary"><i
-                                                        class="fa fa-twitter-square">Tweet</i></button>
-                                            </div>
-                                            </p>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
-    </nav>
+        <div class="card">
+            <img class="card-img-top" data-src="holder.js/100%x180/" alt="Card image cap"/>
 
-    <div class="container-fluid">
+            <div class="card-block">
+                <h4 class="card-title">Card title</h4>
 
-        <!--left-->
-        <div class="col-sm-3 col">
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
 
-            <div class="col-sm-3 col">
-                <div class="container usercard">
-                    <div class="row">
-                        <div class="span1">
-                            <img class="thumbnail" src="//placehold.it/100x100">
-                        </div>
-                        <div class="span3">
-                            <h5>Username</h5>
-                            <h5>Login</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="span3 offset1">
-                            Twits <span class="badge badge-success">2</span> Following <span
-                                class="badge badge-success">2</span> Followers <span
-                                class="badge badge-success">2</span>
-                        </div>
-                    </div>
-                </div>
-                -->
+                <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
             </div>
-
         </div>
-        <!--/left-->
+        <div class="card">
+            <img class="card-img-top" data-src="holder.js/100%x180/" alt="Card image cap"/>
 
-        <!--center-->
-        <div class="col-sm-6">
-            <div class="row">
-                <ul class="nav nav-tabs" id="UserTabs">
-                    <li class="nav-link <c:if test=" ${tab=='tweets'}">active</c:if>" role="presentation"><a
-                            href="/${user.getLogin()}">Tweets <span
-                            class="badge badge-success active">${user.getTweets().size()}</span></a></li>
-                    <li class="nav-link <c:if test=" ${tab==
-                    'following'}">active</c:if>" role="presentation"><a
-                        href="/${user.getLogin()}/following">Following <span
-                        class="badge badge-success">${user.getFollowings().size()}</span></a></li>
-                    <li class="nav-link <c:if test=" ${tab==
-                    'followers'}">active</c:if>" role="presentation"><a
-                        href="/${user.getLogin()}/followers">Followers <span
-                        class="badge badge-success">${user.getFollowers().size()}</span></a></li>
-                </ul>
+            <div class="card-block">
+                <h4 class="card-title">Card title</h4>
 
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This card has even longer content than the first to show that equal height action.</p>
+
+                <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-
-                    <!--tweets-->
-                    <c:if test="${tab=='tweets'}">
-                        <c:forEach items="${user.getTweets()}" var="tweet">
-                            <h2>${tweet.getOwner().getLogin()}</h2>
-
-                            <p>${tweet.getText()}</p>
-
-                            <p class="lead">
-                                <button class="btn btn-default">Read More</button>
-                            </p>
-                            <p class="pull-right"><span class="label label-default">keyword</span> <span
-                                    class="label label-default">tag</span> <span class="label label-default">post</span>
-                            </p>
-                            <ul class="list-inline">
-                                <li><a href="#">${tweet.getDateCreated()}</a></li>
-                                <%--
-                                <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li>
-                                --%>
-                                <%--
-                                <li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li>
-                                --%>
-                            </ul>
-                            <hr>
-                        </c:forEach>
-                    </c:if>
-                    <!--/tweets-->
-
-                    <!--following-->
-                    <c:if test="${tab=='following'}">
-                        <div class="row">
-                            <c:forEach items="${user.getFollowings()}" var="user">
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="span1">
-                                            <img class="thumbnail" src="//placehold.it/100x100">
-                                        </div>
-                                        <div class="span3">
-                                            <h5>${user.getName()}</h5>
-                                            <h5>
-                                                <a href="/${user.getLogin()}" class="href">${user.getLogin()}</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="span3 offset1">
-                                            Tweets <span class="badge badge-success">${user.getTweets().size()}</span>
-                                            Following <span
-                                                class="badge badge-success">${user.getFollowings().size()}</span>
-                                            Followers <span
-                                                class="badge badge-success">${user.getFollowers().size()}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </c:if>
-                    <!--/following-->
-
-                    <!--followers-->
-                    <c:if test="${tab=='followers'}">
-                        <div class="row">
-                            <c:forEach items="${user.getFollowers()}" var="user">
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="span1">
-                                            <img class="thumbnail" src="//placehold.it/100x100">
-                                        </div>
-                                        <div class="span3">
-                                            <h5>${user.getName()}</h5>
-                                            <h5>${user.getLogin()}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="span3 offset1">
-                                            Tweets <span class="badge badge-success">${user.getTweets().size()}</span>
-                                            Following <span
-                                                class="badge badge-success">${user.getFollowings().size()}</span>
-                                            Followers <span
-                                                class="badge badge-success">${user.getFollowers().size()}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </c:if>
-                    <!--/followers-->
-
-                </div>
-            </div>
-            <%--
-            <hr>
-            --%>
-
         </div>
-        <!--/center-->
-
-        <!--right-->
-        <div class="col-sm-3">
-            <h2>Side</h2>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Title</div>
-                <div class="panel-body">Content here..</div>
-            </div>
-            <hr>
-        </div>
-        <!--/right-->
-        <hr>
     </div>
 </div>
 </body>
