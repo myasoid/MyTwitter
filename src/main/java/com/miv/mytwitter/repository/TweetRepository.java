@@ -15,7 +15,7 @@ public interface TweetRepository extends JpaRepository<Tweet, String> {
 
     Page<Tweet> findByOwner(User user, Pageable page);
 
-    @Query("select t from Tweet t where t.owner in (select u.following from User u where u  = :user)")
-    Page<Tweet> findByUser(@Param("user") User user, Pageable page);
+//    @Query("select t from Tweet t where t.owner in (select u.following from User u where u  = :user)")
+//    Page<Tweet> findByUser(@Param("user") User user, Pageable page);
 
 }

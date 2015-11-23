@@ -73,7 +73,7 @@ public class User extends AbstractBaseEntity {
             inverseJoinColumns =
             @JoinColumn(name = "User")
     )
-    private Set<User> following;
+    private Set<User> followings;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Followers",
@@ -95,7 +95,7 @@ public class User extends AbstractBaseEntity {
         this.login = login;
         this.password = password;
         this.followers = new HashSet<User>();
-        this.following = new HashSet<User>();
+        this.followings = new HashSet<User>();
     }
 
     public String getLogin() {
@@ -147,15 +147,19 @@ public class User extends AbstractBaseEntity {
     }
 
     public Set<User> getFollowings() {
-        return following;
+        return followings;
+    }
+
+    public void removeFollowing(User following) {
+        followings.remove(following);
     }
 
     public void setFollowing(User following) {
         if (following != null) {
-            if (this.following == null) {
-                this.following = new HashSet<User>();
+            if (this.followings == null) {
+                this.followings = new HashSet<User>();
             }
-            this.following.add(following);
+            this.followings.add(following);
         }
     }
 
