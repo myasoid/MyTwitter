@@ -24,58 +24,59 @@
         <div class="col-sm-9 col">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li th:class="${activeTab == 'tweets'} ? 'active' : null"><a href="#" th:href="@{/${profile}}"
-                                                                             data-toggle="tab">Tweets</a></li>
-                <li th:class="${activeTab == 'followings'} ? 'active' : null"><a href="#"
-                                                                                 th:href="@{/${profile}/followings}"
-                                                                                 data-toggle="tab">Followings</a></li>
-                <li th:class="${activeTab == 'followers'} ? 'active' : null"><a href="#"
-                                                                                th:href="@{/${profile}/folowers}"
-                                                                                data-toggle="tab">Followers</a></li>
+            <ul class="nav nav-tabs col-sm-8">
+                <li role="presentation" th:class="${activeTab == 'tweets'} ? 'active' : null"><a href="#"
+                                                                                                 th:href="${'/'+userProfileCard.login+'/'}">Tweets <span
+                        class="badge badge-success"
+                        th:text="${userProfileCardTweetsSize}">3</span></a>
+                </li>
+                <li role="presentation" th:class="${activeTab == 'followings'} ? 'active' : null"><a href="#"
+                                                                                                     th:href="${'/'+userProfileCard.login+'/following'}">Following <span
+                        class="badge badge-success"
+                        th:text="${userProfileCardFollowingsSize}">3</span></a>
+                </li>
+                <li role="presentation" th:class="${activeTab == 'followers'} ? 'active' : null"><a href="#"
+                                                                                                    th:href="${'/'+userProfileCard.login+'/followers'}">Followers <span
+                        class="badge badge-success"
+                        th:text="${userProfileCardFollowersSize}">3</span></a>
+                </li>
             </ul>
+
+            <p>
+            </p>
 
             <!-- Tab panes -->
 
-
             <div class="tab-content" th:switch="${activeTab}">
-                <div class="tab-pane active" id="tweets" th:case="'tweets'">tweets</div>
+                <div class="tab-pane active" id="tweets" th:case="'tweets'">
+                    <div th:each="tweet : ${profileTwits}">
+
+                        <div class='col-sm-8'>
+                            <!--tweet-->
+                            <div th:replace="fragments/tweet_card"></div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="tab-pane active" id="followings" th:case="'followings'">
                     <div class="row">
-
-                        <div class="col-md-4">
-                            <!--profile card-->
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/320x125/EEE" class=""/>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a class="thumbnail pull-left" href="#">
-                                            <img class="media-object" src="//placehold.it/80"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <!--<h4 th:text="${profile.firstName + ' ' + profile.lastName}">John Doe</h4>-->
-                                            <!--<h5 th:text="${profile.Login}">@login</h5>-->
-                                        </div>
-                                        <div class="row row-left">
-                                            <!--<a href="#" th:href="/${profile.Login}"-->
-                                            <!--class="btn btn-default btn-xs"-->
-                                            <!--role="button">More</a>-->
-
-                                            <!--<a href="#" method="post" th:action=""-->
-                                            <!--class="btn btn-default btn-xs"-->
-                                            <!--role="button">Following</a>-->
-                                        </div>
-                                    </div>
-                                </div>
+                        <div th:each="profile : ${profileFollowings}">
+                            <div class="col-md-4">
+                                <!--profile card-->
+                                <div th:replace="fragments/profile_card_mini"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane active" id="folowers" th:case="'followers'">
-                    folowers
+                    <div class="row">
+                        <div th:each="profile : ${profileFollowers}">
+                            <div class="col-md-4">
+                                <!--profile card-->
+                                <div th:replace="fragments/profile_card_mini"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

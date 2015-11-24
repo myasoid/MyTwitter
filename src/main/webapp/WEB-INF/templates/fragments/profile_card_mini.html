@@ -15,17 +15,17 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                <!--<h4 th:text="${profile.firstName + ' ' + profile.lastName}">John Doe</h4>-->
-                <!--<h5 th:text="${profile.Login}">@login</h5>-->
+                <h4 th:text="${profile.firstName + ' ' + profile.lastName}">John Doe</h4>
+                <h5 th:text="${profile.Login}">@login</h5>
             </div>
             <div class="row row-left">
-                <!--<a href="#" th:href="/${profile.Login}"-->
-                <!--class="btn btn-default btn-xs"-->
-                <!--role="button">More</a>-->
+                <a href="#" th:href="${'/'+profile.Login}"
+                   class="btn btn-default btn-xs"
+                   role="button">More</a>
 
-                <!--<a href="#" method="post" th:action=""-->
-                <!--class="btn btn-default btn-xs"-->
-                <!--role="button">Following</a>-->
+                <a href="#" method="post" th:action=""
+                   class="btn btn-default btn-xs"
+                   role="button">Following</a>
             </div>
         </div>
     </div>
