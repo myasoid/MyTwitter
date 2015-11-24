@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<body>
+
+<div class="thumbnail" th:fragment="profile_card_mini">
+    <img src="http://placehold.it/320x125/EEE" class=""/>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a class="thumbnail pull-left" href="#">
+                <img class="media-object" src="//placehold.it/80"/>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <!--<h4 th:text="${profile.firstName + ' ' + profile.lastName}">John Doe</h4>-->
+                <!--<h5 th:text="${profile.Login}">@login</h5>-->
+            </div>
+            <div class="row row-left">
+                <!--<a href="#" th:href="/${profile.Login}"-->
+                <!--class="btn btn-default btn-xs"-->
+                <!--role="button">More</a>-->
+
+                <!--<a href="#" method="post" th:action=""-->
+                <!--class="btn btn-default btn-xs"-->
+                <!--role="button">Following</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

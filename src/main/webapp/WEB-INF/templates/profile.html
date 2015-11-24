@@ -17,24 +17,7 @@
 
         <!--left-->
         <div class="col-sm-3 col">
-            <div class="container usercard">
-                <div class="row">
-                    <div class="span1">
-                        <img class="thumbnail" src="http://placehold.it/100x100"/>
-                    </div>
-                    <div class="span3">
-                        <!--<h5 th:text="${user.firstName + ' ' + user.lastName}">lastName</h5>-->
-                        <!--<h5 th:text="${user.Login}">login</h5>-->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span3 offset1">
-                        Tweets <span class="badge badge-success" th:text="${tweetssize}">3</span>
-                        Following <span class="badge badge-success" th:text="${followingssize}">6</span>
-                        Followers <span class="badge badge-success" th:text="${followerssize}">9</span>
-                    </div>
-                </div>
-            </div>
+            <div th:replace="fragments/profile_card"></div>
         </div>
 
         <!--center-->
@@ -42,16 +25,24 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#" th:href="@{/${profile}}" data-toggle="tab">Tweets</a></li>
-                <li><a href="#" th:href="@{/${profile}/followings}" data-toggle="tab">Followings</a></li>
-                <li><a href="#" th:href="@{/${profile}/folowers}" data-toggle="tab">Followers</a></li>
+                <li th:class="${activeTab == 'tweets'} ? 'active' : null"><a href="#" th:href="@{/${profile}}"
+                                                                             data-toggle="tab">Tweets</a></li>
+                <li th:class="${activeTab == 'followings'} ? 'active' : null"><a href="#"
+                                                                                 th:href="@{/${profile}/followings}"
+                                                                                 data-toggle="tab">Followings</a></li>
+                <li th:class="${activeTab == 'followers'} ? 'active' : null"><a href="#"
+                                                                                th:href="@{/${profile}/folowers}"
+                                                                                data-toggle="tab">Followers</a></li>
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="tweets">tweets</div>
-                <div class="tab-pane" id="followings">
+
+
+            <div class="tab-content" th:switch="${activeTab}">
+                <div class="tab-pane active" id="tweets" th:case="'tweets'">tweets</div>
+                <div class="tab-pane active" id="followings" th:case="'followings'">
                     <div class="row">
+
                         <div class="col-md-4">
                             <!--profile card-->
                             <div class="thumbnail">
@@ -83,7 +74,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="folowers">folowers</div>
+                <div class="tab-pane active" id="folowers" th:case="'followers'">
+                    folowers
+                </div>
             </div>
 
         </div>

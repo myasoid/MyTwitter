@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<body>
+
+<div class="container usercard" th:fragment="profile_card">
+    <div class="row">
+        <div class="span1" th:href="${'/'+userProfileCard.Login+'/'}">
+            <img class="thumbnail" src="http://placehold.it/100x100"/>
+        </div>
+        <div class="span3">
+            <a th:href="${'/'+userProfileCard.Login+'/'}"><h4
+                    th:text="${userProfileCard.firstName + ' ' + userProfileCard.lastName}">Name + lastName</h4></a>
+
+            <a th:href="${'/'+userProfileCard.Login+'/'}"><h5 th:text="${'@'+userProfileCard.Login}">@login</h5></a>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3 offset1">
+            <a th:href="${'/'+userProfileCard.Login+'/'}">Tweets</a> <span class="badge badge-success"
+                                                                           th:text="${userProfileCardTweetsSize}">3</span>
+            <a th:href="${'/'+userProfileCard.Login+'/following'}">Following</a> <span class="badge badge-success"
+                                                                                       th:text="${userProfileCardFollowingsSize}">6</span>
+            <a th:href="${'/'+userProfileCard.Login+'/followers'}">Followers</a> <span class="badge badge-success"
+                                                                                       th:text="${userProfileCardFollowersSize}">9</span>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

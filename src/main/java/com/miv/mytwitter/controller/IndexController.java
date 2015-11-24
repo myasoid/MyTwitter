@@ -21,11 +21,10 @@ public class IndexController {
     public String showIndex(final HttpServletRequest request, Principal principal, Model model) {
         final String currentUserLogin = principal.getName();
         User user = userService.findByLogin(currentUserLogin);
-        model.addAttribute("profile", "/" + currentUserLogin);
-        model.addAttribute("user", user);
-        model.addAttribute("tweetssize", user.getTwits().size());
-        model.addAttribute("followingssize", user.getFollowings().size());
-        model.addAttribute("followerssize", user.getFollowers().size());
+        model.addAttribute("userProfileCard", user);
+        model.addAttribute("userProfileCardTweetsSize", user.getTwits().size());
+        model.addAttribute("userProfileCardFollowingsSize", user.getFollowings().size());
+        model.addAttribute("userProfileCardFollowersSize", user.getFollowers().size());
         return "index";
     }
 }

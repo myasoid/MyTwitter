@@ -3,6 +3,8 @@ package com.miv.mytwitter.controller;
 
 import com.miv.mytwitter.domain.User;
 import com.miv.mytwitter.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,39 +17,44 @@ import java.security.Principal;
 @Controller
 public class ProfileController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class);
+
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = "/{username}/", method = RequestMethod.GET)
     //  @PreAuthorize("@userService.canAccessUser(principal, #username)")
-    @RequestMapping(value = "/{username}\b(?<!/login|/signup)", method = RequestMethod.GET)
-    @Transactional
     public String getProfile(@PathVariable("username") String userName, HttpServletRequest request, Principal principal, Model model) {
         setModelAttribute(userName, request, principal, model, "tweets");
         return "profile";
     }
 
-    @RequestMapping(value = "/{username}/following\b(?<!/login|/signup)", method = RequestMethod.GET)
-    @Transactional
+    @RequestMapping(value = "/{username}/following", method = RequestMethod.GET)
     public String getProfileFollowing(@PathVariable("username") String userName, HttpServletRequest request, Principal principal, Model model) {
-        setModelAttribute(userName, request, principal, model, "following");
+        setModelAttribute(userName, request, principal, model, "followings");
         return "profile";
     }
 
-    @RequestMapping(value = "/{username}/followers\b(?<!/login|/signup)", method = RequestMethod.GET)
-    @Transactional
+    @RequestMapping(value = "/{username}/followers", method = RequestMethod.GET)
     public String getProfileFollowers(@PathVariable("username") String userName, HttpServletRequest request, Principal principal, Model model) {
         setModelAttribute(userName, request, principal, model, "followers");
         return "profile";
     }
 
+    @Transactional
     public void setModelAttribute(String userName, HttpServletRequest request, Principal principal, Model model, String activeTab) {
-        final String currentUserLogin = principal.getName();
-        User currentUser = userService.findByLogin(currentUserLogin);
-        model.addAttribute("profile", userName);
-        model.addAttribute("user", currentUser);
-        model.addAttribute("tweetssize", currentUser.getTwits().size());
-        model.addAttribute("followingssize", currentUser.getFollowings().size());
-        model.addAttribute("followerssize", currentUser.getFollowers().size());
+
+        model.addAttribute("activeTab", activeTab);
+
+        User profile = userService.findByLogin(userName);
+        model.addAttribute("userProfileCard", profile);
+        model.addAttribute("userProfileCardTweetsSize", profile.getTwits().size());
+        model.addAttribute("userProfileCardFollowingsSize", profile.getFollowings().size());
+        model.addAttribute("userProfileCardFollowersSize", profile.getFollowers().size());
+
+        model.addAttribute("profileTwits", profile.getTwits());
+        model.addAttribute("profileFollowings", profile.getFollowings());
+        model.addAttribute("profileFollowers", profile.getFollowers());
     }
 
 }
