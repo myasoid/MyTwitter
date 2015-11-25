@@ -46,11 +46,9 @@
             </p>
 
             <!-- Tab panes -->
-
             <div class="tab-content" th:switch="${activeTab}">
                 <div class="tab-pane active" id="tweets" th:case="'tweets'">
                     <div th:each="tweet : ${profileTwits}">
-
                         <div class='col-sm-8'>
                             <!--tweet-->
                             <div th:replace="fragments/tweet_card"></div>

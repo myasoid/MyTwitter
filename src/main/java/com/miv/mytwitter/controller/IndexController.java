@@ -22,6 +22,7 @@ public class IndexController {
         final String currentUserLogin = principal.getName();
         User user = userService.findByLogin(currentUserLogin);
         model.addAttribute("userProfileCard", user);
+        model.addAttribute("tweets", user.getTwits());
         model.addAttribute("userProfileCardTweetsSize", user.getTwits().size());
         model.addAttribute("userProfileCardFollowingsSize", user.getFollowings().size());
         model.addAttribute("userProfileCardFollowersSize", user.getFollowers().size());
