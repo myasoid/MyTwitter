@@ -4,18 +4,33 @@
 
 <body>
 
-<div class="container usercard" th:fragment="profile_card">
+<div class="profile_card" th:fragment="profile_card">
     <div class="row">
-        <div class="span1" th:href="${'/'+userProfileCard.Login+'/'}">
-            <img class="thumbnail" src="http://placehold.it/100x100"/>
+        <div class="col-sm-6">
+            <div class="span1" th:href="${'/'+userProfileCard.Login+'/'}">
+                <img class="thumbnail" src="http://placehold.it/80x80"/>
+            </div>
         </div>
-        <div class="span3">
-            <a th:href="${'/'+userProfileCard.Login+'/'}"><h4
-                    th:text="${userProfileCard.firstName + ' ' + userProfileCard.lastName}">Name + lastName</h4></a>
+        <div class="col-sm-6">
+            <div class="span3">
+                <a th:href="${'/'+userProfileCard.Login+'/'}"><h4
+                        th:text="${userProfileCard.firstName + ' ' + userProfileCard.lastName}">Name + lastName</h4>
+                </a>
 
-            <a th:href="${'/'+userProfileCard.Login+'/'}"><h5 th:text="${'@'+userProfileCard.Login}">@login</h5></a>
+                <a th:href="${'/'+userProfileCard.Login+'/'}"><h5 th:text="${'@'+userProfileCard.Login}">@login</h5>
+                </a>
 
 
+                <form th:if="${userProfileCard.Login !=#httpServletRequest.getUserPrincipal().getName()}"
+                      th:action="@{/follow/} + ${userProfileCard.Login}" method="post">
+                    <button type="submit" class="btn btn-default" th:if="${userProfileFollowed}"><i
+                            class="fa fa-twitter-square"> Follow</i></button>
+
+                    <button type="submit" class="btn btn-default" th:unless="${userProfileFollowed}"><i
+                            class="fa fa-twitter-square"> Unfollow</i></button>
+                </form>
+
+            </div>
         </div>
     </div>
     <div class="row">

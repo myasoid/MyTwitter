@@ -16,16 +16,21 @@
         <div class="col-md-6">
             <div class="row">
                 <h4 th:text="${profile.firstName + ' ' + profile.lastName}">John Doe</h4>
-                <h5 th:text="${profile.Login}">@login</h5>
+                <h5 th:text="${'@'+profile.Login}">login</h5>
             </div>
             <div class="row row-left">
                 <a href="#" th:href="${'/'+profile.Login}"
                    class="btn btn-default btn-xs"
                    role="button">More</a>
 
-                <a href="#" method="post" th:action=""
-                   class="btn btn-default btn-xs"
-                   role="button">Following</a>
+                <form th:if="${profile.Login !=#httpServletRequest.getUserPrincipal().getName()}"
+                      th:action="@{/follow/} + ${profile.Login}" method="post">
+                    <button type="submit" class="btn btn-default" th:if="${userProfileFollowed}"><i
+                            class="fa fa-twitter-square"> Follow</i></button>
+
+                    <button type="submit" class="btn btn-default" th:unless="${userProfileFollowed}"><i
+                            class="fa fa-twitter-square"> Unfollow</i></button>
+                </form>
             </div>
         </div>
     </div>

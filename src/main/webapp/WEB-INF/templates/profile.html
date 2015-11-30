@@ -24,7 +24,7 @@
         <div class="col-sm-9 col">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs col-sm-8">
+            <ul class="nav nav-tabs">
                 <li role="presentation" th:class="${activeTab == 'tweets'} ? 'active' : null"><a href="#"
                                                                                                  th:href="${'/'+userProfileCard.login+'/'}">Tweets <span
                         class="badge badge-success"
@@ -42,19 +42,20 @@
                 </li>
             </ul>
 
-            <p>
-            </p>
+            <p></p>
 
             <!-- Tab panes -->
             <div class="tab-content" th:switch="${activeTab}">
                 <div class="tab-pane active" id="tweets" th:case="'tweets'">
-                    <div th:each="tweet : ${profileTwits}">
-                        <div class='col-sm-8'>
-                            <!--tweet-->
-                            <div th:replace="fragments/tweet_card"></div>
+                    <div class="col-sm-12">
+                        <div th:each="tweet : ${profileTwits}">
+                            <div class='col-sm-8'>
+                                <!--tweet-->
+                                <div th:replace="fragments/tweet_card"></div>
+                            </div>
                         </div>
-
                     </div>
+                    <div th:replace="fragments/paginationbar"></div>
                 </div>
                 <div class="tab-pane active" id="followings" th:case="'followings'">
                     <div class="row">

@@ -17,20 +17,20 @@ public class FollowController {
     @Autowired
     UserService userService;
 
-//    @RequestMapping(value = "/{username}/follow/{followBy}", method = RequestMethod.POST)
-//    public String followProfile(@PathVariable("login") String login, final HttpServletRequest request, Principal principal, Model model) {
-//        final String currentUserLogin = principal.getName();
-//        User currentUser = userService.findByLogin(currentUserLogin);
-//        User user = userService.findByLogin(login);
-//
-//        if (currentUser.getFollowings().contains(user)) {
-//            currentUser.removeFollowing(user);
-//        } else {
-//            currentUser.setFollowing(user);
-//        }
-//
-//        userService.save(currentUser);
-//
-//        return "redirect:" + request.getHeader("Referer");
-//    }
+    @RequestMapping(value = "/follow/{followBy}", method = RequestMethod.POST)
+    public String followProfile(@PathVariable("followBy") String followBy, final HttpServletRequest request, Principal principal, Model model) {
+        final String currentUserLogin = principal.getName();
+        User currentUser = userService.findByLogin(principal.getName());
+        User user = userService.findByLogin(followBy);
+
+        if (user != null) {
+            if (currentUser.getFollowings().contains(user)) {
+                currentUser.removeFollowing(user);
+            } else {
+                currentUser.setFollowing(user);
+            }
+            userService.save(currentUser);
+        }
+        return "redirect:" + request.getHeader("Referer");
+    }
 }

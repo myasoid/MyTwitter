@@ -9,6 +9,8 @@ import com.miv.mytwitter.service.TagService;
 import com.miv.mytwitter.service.TweetService;
 import com.miv.mytwitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,6 +32,16 @@ public class TweetServiceRelational implements TweetService {
 
     @Autowired
     TweetRepository tweetRepository;
+
+
+    @Override
+    public Page<Tweet> findTweetByOwner(User user, Pageable page) {
+        return tweetRepository.findTweetByOwnerOrderByDateCreatedDesc(user, page);
+    }
+
+    public Page<Tweet> findTweetByOwnerIn(Collection<User> users, Pageable page) {
+        return tweetRepository.findTweetByOwnerInOrderByDateCreatedDesc(users, page);
+    }
 
     @Override
     public Tweet save(Tweet tweet) {
